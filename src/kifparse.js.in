@@ -1,3 +1,4 @@
+// vi: set ft=javascript :
 (function() {
 	if (! window.kifparse) {
 		window.kifparse = {};
@@ -11,5 +12,5 @@
 			return matchres;
 		}
 	};
-	_kifparse.parse_line = parse_line
+	_kifparse.parse_line = parse_line;
 })();
