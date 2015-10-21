@@ -5,7 +5,79 @@
 	}
 	var _kifparse = window.kifparse;
 
+	var alist2map = function(alist) {
+		var res = {};
+		for (var i = 0; i < alist.length; ++i) {
+			var k = alist[i][0];
+			var v = alist[i][1];
+			res[k] = v;
+		}
+		return res;
+	};
+	var alist2rmap = function(alist) {
+		var res = {};
+		for (var i = 0; i < alist.length; ++i) {
+			var k = alist[i][0];
+			var v = alist[i][1];
+			res[v] = k;
+		}
+		return res;
+	};
+
+	var piece_list =
+	[["FU","歩"]
+	,["KY","香"]
+	,["KE","桂"]
+	,["GI","銀"]
+	,["KI","金"]
+	,["KA","角"]
+	,["HI","飛"]
+	,["OU","玉"]
+	,["TO","と"]
+	,["NY","成香"]
+	,["NK","成桂"]
+	,["NG","成銀"]
+	,["UM","馬"]
+	,["RY","龍"]
+	];
+
+	var piece_map = alist2map(piece_list);
+	var piece_rmap = alist2rmap(piece_list);
+
+	var coord_list =
+	[["1",1]
+	,["2",2]
+	,["3",3]
+	,["4",4]
+	,["5",5]
+	,["6",6]
+	,["7",7]
+	,["8",8]
+	,["9",9]
+	,["１",1]
+	,["２",2]
+	,["３",3]
+	,["４",4]
+	,["５",5]
+	,["６",6]
+	,["７",7]
+	,["８",8]
+	,["９",9]
+	,["一",1]
+	,["二",2]
+	,["三",3]
+	,["四",4]
+	,["五",5]
+	,["六",6]
+	,["七",7]
+	,["八",8]
+	,["九",9]
+	];
+
+	var coord_map = alist2map(coord_list);
+
 	var parse_line = function(line) {
+		// TODO: gen from piece_list / coord_list
 		var re = /^ *(\d+) +([１２３４５６７８９][１２３４５６７８９一二三四五六七八九]|同)　*(歩|と|香|成香|桂|成桂|銀|成銀|金|角|馬|飛|龍|玉)(成?)(打|\(\d\d\)) *\((.*)\/(.*)\)/;
 		var matchres;
 		if (matchres = line.match(re)) {
