@@ -23,6 +23,13 @@
 		}
 		return res;
 	};
+	var map = function(cb, list) {
+		var res = [];
+		for (var i = 0; i < list.length; ++i) {
+			res[i] = cb(list[i]);
+		}
+		return res;
+	};
 
 	var piece_list =
 	[["\u6b69"  ,"FU"]
@@ -43,6 +50,7 @@
 
 	var piece_map = alist2map(piece_list);
 	var piece_rmap = alist2rmap(piece_list);
+	var pat_piece = map(function(x){return x[0];}, piece_list).join('|');
 
 	var coord_list =
 	[["1",1]
@@ -75,9 +83,10 @@
 	];
 
 	var coord_map = alist2map(coord_list);
+	var pat_coord = map(function(x){return x[0];}, coord_list).join('|');
 
 	var parse_line = function(line) {
-		// TODO: gen from piece_list / coord_list
+		// TODO: gen from pat_piece / pat_coord
 		var re = /^ *(\d+) +([\uff11\uff12\uff13\uff14\uff15\uff16\uff17\uff18\uff19][\uff11\uff12\uff13\uff14\uff15\uff16\uff17\uff18\uff19\u4e00\u4e8c\u4e09\u56db\u4e94\u516d\u4e03\u516b\u4e5d]|\u540c)\u3000*(\u6b69|\u3068|\u9999|\u6210\u9999|\u6842|\u6210\u6842|\u9280|\u6210\u9280|\u91d1|\u89d2|\u99ac|\u98db|\u9f8d|\u7389)(\u6210?)(\u6253|\(\d\d\)) *\((.*)\/(.*)\)/;
 		var matchres;
 		if (matchres = line.match(re)) {
