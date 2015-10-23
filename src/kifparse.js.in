@@ -113,7 +113,21 @@
 				);
 		var matchres;
 		if (matchres = line.match(re)) {
-			return matchres;
+			var mvsrc = (matchres[7] && matchres[8])
+			? { "x":coord_map[matchres[7]], "y":coord_map[matchres[8]] }
+			: false;
+			var mvdst = (matchres[2] && matchres[3])
+			? { "x":coord_map[matchres[2]], "y":coord_map[matchres[3]] }
+			: true;
+			return {
+				"TYPE" : "MOVE"
+			,	"SERIAL" : matchres[1]
+			,	"PIECE" : piece_map[matchres[5]]
+			,	"MVSRC" : mvsrc
+			,	"MVDST" : mvdst
+			,	"PROMOTE" : (matchres[6] ? true : false)
+			,	"SPENT" : matchres[10]
+			};
 		}
 	};
 	_kifparse.parse_line = parse_line;
