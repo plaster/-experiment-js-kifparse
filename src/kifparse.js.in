@@ -87,7 +87,30 @@
 
 	var parse_line = function(line) {
 		// TODO: gen from pat_piece / pat_coord
-		var re = /^ *(\d+) +([１２３４５６７８９][１２３４５６７８９一二三四五六七八九]|同)　*(歩|と|香|成香|桂|成桂|銀|成銀|金|角|馬|飛|龍|玉)(成?)(打|\(\d\d\)) *\((.*)\/(.*)\)/;
+		var re = new RegExp(
+				'^ *'
+				+ '(' + '[0-9]+' + ')'
+				+ ' +'
+				+ '(?:'
+					+ '(' + pat_coord + ')'
+					+ '(' + pat_coord + ')'
+				+ '|(同)'
+				+ ')'
+				+ '　*'
+				+ '(' + pat_piece + ')'
+				+ '(成?)'
+				+ '(?:'
+					+ '\\('
+						+ '(' + pat_coord + ')'
+						+ '(' + pat_coord + ')'
+					+ '\\)'
+					+ '|(打)'
+				+ ')'
+				+ ' *'
+				+ '\\('
+					+ '(.*)/(.*)'
+				+ '\\)'
+				);
 		var matchres;
 		if (matchres = line.match(re)) {
 			return matchres;
