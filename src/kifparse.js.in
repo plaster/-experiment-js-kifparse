@@ -85,6 +85,18 @@
 	var coord_map = alist2map(coord_list);
 	var pat_coord = map(function(x){return x[0];}, coord_list).join('|');
 
+	var t2sec = function(timestr) {
+		var matchres;
+		if (matchres = timestr.match(/^(?:(?: *(\d+):)? *(\d+):)? *(\d+)$/)) {
+			var hh = matchres[1] ? Number(matchres[1]) : 0;
+			var mm = matchres[2] ? Number(matchres[2]) : 0;
+			var ss = matchres[3] ? Number(matchres[3]) : 0;
+			return ss + 60 * (mm + 60 * hh);
+		} else {
+			return false;
+		}
+	};
+
 	var parse_line = function(line) {
 		// TODO: gen from pat_piece / pat_coord
 		var re = new RegExp(
@@ -108,7 +120,7 @@
 				+ ')'
 				+ ' *'
 				+ '\\('
-					+ '(.*)/(.*)'
+					+ ' *([^ ]*) */ *([^ ]*) *'
 				+ '\\)'
 				);
 		var matchres;
@@ -121,12 +133,13 @@
 			: true;
 			return {
 				"TYPE" : "MOVE"
-			,	"SERIAL" : matchres[1]
+			,	"SERIAL" : Number(matchres[1])
 			,	"PIECE" : piece_map[matchres[5]]
 			,	"MVSRC" : mvsrc
 			,	"MVDST" : mvdst
 			,	"PROMOTE" : (matchres[6] ? true : false)
-			,	"SPENT" : matchres[10]
+			,	"SPENT" : t2sec(matchres[10])
+			,	"SPTOTAL" : t2sec(matchres[11])
 			};
 		}
 	};
