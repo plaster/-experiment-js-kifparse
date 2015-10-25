@@ -97,32 +97,33 @@
 		}
 	};
 
+	var re_move = new RegExp(
+			'^ *'
+			+ '(' + '[0-9]+' + ')'
+			+ ' +'
+			+ '(?:'
+				+ '(' + pat_coord + ')'
+				+ '(' + pat_coord + ')'
+			+ '|(同)'
+			+ ')'
+			+ '　*'
+			+ '(' + pat_piece + ')'
+			+ '(成?)'
+			+ '(?:'
+				+ '\\('
+					+ '(' + pat_coord + ')'
+					+ '(' + pat_coord + ')'
+				+ '\\)'
+				+ '|(打)'
+			+ ')'
+			+ ' *'
+			+ '\\('
+				+ ' *([^ ]*) */ *([^ ]*) *'
+			+ '\\)'
+			);
+
 	var parse_line = function(line) {
 		// TODO: gen from pat_piece / pat_coord
-		var re_move = new RegExp(
-				'^ *'
-				+ '(' + '[0-9]+' + ')'
-				+ ' +'
-				+ '(?:'
-					+ '(' + pat_coord + ')'
-					+ '(' + pat_coord + ')'
-				+ '|(同)'
-				+ ')'
-				+ '　*'
-				+ '(' + pat_piece + ')'
-				+ '(成?)'
-				+ '(?:'
-					+ '\\('
-						+ '(' + pat_coord + ')'
-						+ '(' + pat_coord + ')'
-					+ '\\)'
-					+ '|(打)'
-				+ ')'
-				+ ' *'
-				+ '\\('
-					+ ' *([^ ]*) */ *([^ ]*) *'
-				+ '\\)'
-				);
 		var matchres;
 		if (matchres = line.match(re_move)) {
 			var mvsrc = (matchres[7] && matchres[8])
