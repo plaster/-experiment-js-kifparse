@@ -141,6 +141,11 @@
 			,	"SPENT" : t2sec(matchres[10])
 			,	"SPTOTAL" : t2sec(matchres[11])
 			};
+		} else if (matchres = line.match(/^\*(.*)$/)) {
+			return {
+				"TYPE" : "COMMENT"
+			,	"TEXT" : matchres[1]
+			};
 		}
 	};
 	_kifparse.parse_line = parse_line;
