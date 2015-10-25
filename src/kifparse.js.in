@@ -99,7 +99,7 @@
 
 	var parse_line = function(line) {
 		// TODO: gen from pat_piece / pat_coord
-		var re = new RegExp(
+		var re_move = new RegExp(
 				'^ *'
 				+ '(' + '[0-9]+' + ')'
 				+ ' +'
@@ -124,7 +124,7 @@
 				+ '\\)'
 				);
 		var matchres;
-		if (matchres = line.match(re)) {
+		if (matchres = line.match(re_move)) {
 			var mvsrc = (matchres[7] && matchres[8])
 			? { "x":coord_map[matchres[7]], "y":coord_map[matchres[8]] }
 			: false;
