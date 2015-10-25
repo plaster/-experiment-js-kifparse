@@ -143,7 +143,7 @@
 			};
 		} else if (matchres = line.match(/^\*(.*)$/)) {
 			return {
-				"TYPE" : "COMMENT"
+				"TYPE" : "NOTE"
 			,	"TEXT" : matchres[1]
 			};
 		}
