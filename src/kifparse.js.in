@@ -155,6 +155,20 @@
 				: "不明"
 				)
 			};
+		} else if (matchres = line.match(/^先手：(.*)$/)) {
+			var name = matchres[1];
+			return {
+				"TYPE" : "PLAYER"
+			,	"PLAYER" : 1
+			,	"NAME" : name
+			};
+		} else if (matchres = line.match(/^後手：(.*)$/)) {
+			var name = matchres[1];
+			return {
+				"TYPE" : "PLAYER"
+			,	"PLAYER" : 2
+			,	"NAME" : name
+			};
 		} else {
 			// should be syntax error?
 			return null;
