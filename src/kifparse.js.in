@@ -156,7 +156,11 @@
 				: "不明"
 				)
 			};
+		} else {
+			// should be syntax error?
+			return null;
 		}
 	};
+
 	_kifparse.parse_line = parse_line;
 })();
