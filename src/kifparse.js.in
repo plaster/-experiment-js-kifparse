@@ -148,8 +148,13 @@
 			,	"TEXT" : matchres[1]
 			};
 		} else if (matchres = line.match(/^手合割：(.*)$/)) {
+			var handicap = matchres[1].replace(/　/g,"");
 			return {
 				"TYPE" : "HANDICAP"
+			,	"HANDICAP" :
+				( handicap === "平手" ? "PL"
+				: "不明"
+				)
 			};
 		}
 	};
