@@ -123,7 +123,6 @@
 			);
 
 	var parse_line = function(line) {
-		// TODO: gen from pat_piece / pat_coord
 		var matchres;
 		if (matchres = line.match(re_move)) {
 			var mvsrc = (matchres[7] && matchres[8])
