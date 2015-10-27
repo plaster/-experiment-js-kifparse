@@ -131,7 +131,7 @@
 			: false;
 			var mvdst = (matchres[2] && matchres[3])
 			? { "x":coord_map[matchres[2]], "y":coord_map[matchres[3]] }
-			: true;
+			: false;
 			return {
 				"TYPE" : "MOVE"
 			,	"SERIAL" : Number(matchres[1])
