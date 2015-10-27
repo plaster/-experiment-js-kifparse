@@ -151,9 +151,9 @@
 			return {
 				"TYPE" : "HANDICAP"
 			,	"HANDICAP" :
-				( handicap === "平手" ? "PL"
-				: "不明"
-				)
+					( handicap === "平手" ? "PL"
+					: "不明"
+					)
 			};
 		} else if (matchres = line.match(/^先手：(.*)$/)) {
 			var name = matchres[1];
