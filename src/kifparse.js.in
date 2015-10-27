@@ -147,6 +147,10 @@
 				"TYPE" : "NOTE"
 			,	"TEXT" : matchres[1]
 			};
+		} else if (matchres = line.match(/^手合割：(.*)$/)) {
+			return {
+				"TYPE" : "HANDICAP"
+			};
 		}
 	};
 	_kifparse.parse_line = parse_line;
