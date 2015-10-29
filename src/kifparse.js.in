@@ -169,6 +169,10 @@
 			,	"PLAYER" : 2
 			,	"NAME" : name
 			};
+		} else if (matchres = line.match(/^(\d+) 投了$/)) {
+			return {
+				"TYPE" : "TORYO"
+			}
 		} else {
 			// should be syntax error?
 			return null;
