@@ -102,19 +102,22 @@
 			+ '(' + '[0-9]+' + ')'
 			+ ' +'
 			+ '(?:'
-				+ '(' + pat_coord + ')'
-				+ '(' + pat_coord + ')'
-			+ '|(同)'
-			+ ')'
-			+ '　*'
-			+ '(' + pat_piece + ')'
-			+ '(成?)'
-			+ '(?:'
-				+ '\\('
+				+ '(?:'
 					+ '(' + pat_coord + ')'
 					+ '(' + pat_coord + ')'
-				+ '\\)'
-				+ '|(打)'
+				+ '|(同)'
+				+ ')'
+				+ '　*'
+				+ '(' + pat_piece + ')'
+				+ '(成?)'
+				+ '(?:'
+					+ '\\('
+						+ '(' + pat_coord + ')'
+						+ '(' + pat_coord + ')'
+					+ '\\)'
+					+ '|(打)'
+				+ ')'
+			+ '|(投了)'
 			+ ')'
 			+ ' *'
 			+ '\\('
@@ -131,6 +134,16 @@
 			var mvdst = (matchres[2] && matchres[3])
 			? { "x":coord_map[matchres[2]], "y":coord_map[matchres[3]] }
 			: false;
+			if (matchres[10]) {
+				if (matchres[10] === '投了') {
+					return {
+						"TYPE" : "TORYO"
+					,	"SERIAL" : Number(matchres[1])
+					,	"SPENT" : t2sec(matchres[11])
+					,	"SPTOTAL" : t2sec(matchres[12])
+					};
+				}
+			}
 			return {
 				"TYPE" : "MOVE"
 			,	"SERIAL" : Number(matchres[1])
@@ -138,8 +151,8 @@
 			,	"MVSRC" : mvsrc
 			,	"MVDST" : mvdst
 			,	"PROMOTE" : (matchres[6] ? true : false)
-			,	"SPENT" : t2sec(matchres[10])
-			,	"SPTOTAL" : t2sec(matchres[11])
+			,	"SPENT" : t2sec(matchres[11])
+			,	"SPTOTAL" : t2sec(matchres[12])
 			};
 		} else if (matchres = line.match(/^\*(.*)$/)) {
 			return {
@@ -169,10 +182,6 @@
 			,	"PLAYER" : 2
 			,	"NAME" : name
 			};
-		} else if (matchres = line.match(/^(\d+) 投了$/)) {
-			return {
-				"TYPE" : "TORYO"
-			}
 		} else {
 			// should be syntax error?
 			return null;
