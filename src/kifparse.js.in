@@ -137,7 +137,8 @@
 			if (matchres[10]) {
 				if (matchres[10] === '投了') {
 					return {
-						"TYPE" : "TORYO"
+						"TYPE" : "MOVE"
+					,	"PIECE" : "TORYO"
 					,	"SERIAL" : Number(matchres[1])
 					,	"SPENT" : t2sec(matchres[11])
 					,	"SPTOTAL" : t2sec(matchres[12])
