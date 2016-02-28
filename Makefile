@@ -1,3 +1,3 @@
-dist/kifparse.js: src/kifparse.js.in src/mbu.pl
+dist/kifparse.js: src/kifparse.js.in src/jsmbu/mbu.pl
 	mkdir -p dist
-	perl src/mbu.pl < $< > $@
+	perl src/jsmbu/mbu.pl < $< > $@

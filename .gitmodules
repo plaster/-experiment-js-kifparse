@@ -1,0 +1,3 @@
+[submodule "src/jsmbu"]
+	path = src/jsmbu
+	url = git@github.com:plaster/jsmbu.git
