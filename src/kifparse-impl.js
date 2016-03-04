@@ -1,9 +1,5 @@
-// vi: set ft=javascript :
-(function() {
-	if (! window.kifparse) {
-		window.kifparse = {};
-	}
-	var _kifparse = window.kifparse;
+function () {
+	var kifparse = {};
 
 	var alist2map = function(alist) {
 		var res = {};
@@ -189,5 +185,5 @@
 		}
 	};
 
-	_kifparse.parse_line = parse_line;
-})();
+	kifparse.parse_line = parse_line;
+}
